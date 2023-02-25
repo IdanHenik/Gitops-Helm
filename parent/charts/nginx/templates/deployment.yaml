@@ -9,7 +9,7 @@ spec:
  {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}
  {{- else }}
-  replicas: {{ .Values.pre-prod.replicaCount }} 
+  replicas: {{ index .Values.pre-prod.replicaCount }} 
  {{- end }}
   selector:
     matchLabels:

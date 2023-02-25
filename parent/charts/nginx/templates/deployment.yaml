@@ -34,7 +34,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-         {{- if eq $ARGOCD_APP_NAMESPACE "prod" }} 
+          {{- if eq .Release.Namespace "prod" }} 
           image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
           {{- else }}
           image: "{{ .Values.image.repository }}:{{ .Values.pre-prod.image.tag | default .Chart.AppVersion }}"

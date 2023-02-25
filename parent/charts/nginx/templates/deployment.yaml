@@ -6,11 +6,11 @@ metadata:
     {{- include "nginx.labels" . | nindent 4 }}
   #namespace: $ARGOCD_APP_NAMESPACE
 spec:
-  {{- if eq .Release.Namespace "prod" }}
+ {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}
-  {{- else }}
+ {{- else }}
   replicas: {{ .Values.pre-prod.replicaCount }} 
-  {{- end }}
+ {{- end }}
   selector:
     matchLabels:
       {{- include "nginx.selectorLabels" . | nindent 6 }}

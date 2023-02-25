@@ -4,7 +4,7 @@ metadata:
   name: {{ include "apache.fullname" . }}
   labels:
     {{- include "apache.labels" . | nindent 4 }}
-  namespace: $ARGOCD_APP_NAMESPACE
+  #namespace: $ARGOCD_APP_NAMESPACE
 spec:
   {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}

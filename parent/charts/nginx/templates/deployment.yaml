@@ -6,7 +6,7 @@ metadata:
     {{- include "nginx.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.pre-prod.replicaCount }} {{ if eq .Release.Namespace "prod" }} {{ .Values.prod.replicaCount }} {{ end }}
   {{- end }}
   selector:
     matchLabels:
@@ -31,7 +31,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: image: "{{ .Values.image.repository }}:{{ .Values.pre-prod.image.tag | default .Chart.AppVersion }}{{ if eq .Release.Namespace "prod" }} {{ .Values.prod.image.tag }} {{ end }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

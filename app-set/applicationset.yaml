@@ -18,7 +18,6 @@ spec:
       project: "default"
       source:
         helm:
-          releaseNamespace: $ARGOCD_APP_NAMESPACE
           valueFiles:
           - values.poc.yaml
         repoURL: https://github.com/IdanHenik/Gitops-Helm.git

@@ -37,7 +37,7 @@ spec:
          {{- if eq .Release.Namespace "prod" }} 
           image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
          {{- else }}
-          image: "{{ .Values.image.repository }}:{{ index .Values "pre-prod.image.tag" | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ index .Values "pre-prod.image.tag" }}"
          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

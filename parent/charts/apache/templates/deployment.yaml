@@ -6,9 +6,9 @@ metadata:
     {{- include "apache.labels" . | nindent 4 }}
   namespace: $ARGOCD_APP_NAMESPACE
 spec:
- {{ if eq .Release.Namespace "prod" }}
+ {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}
-  {{ else }}
+  {{- else }}
   replicas: {{ .Values.pre-prod.replicaCount }} 
   {{- end }}
   selector:
@@ -34,9 +34,9 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if eq .Release.Namespace "prod" }} 
+          {{- if eq .Release.Namespace "prod" }} 
           image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
-          {{ else }}
+          {{- else }}
           image: "{{ .Values.image.repository }}:{{ .Values.pre-prod.image.tag | default .Chart.AppVersion }}"
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}

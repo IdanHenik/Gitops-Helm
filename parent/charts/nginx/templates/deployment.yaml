@@ -6,8 +6,10 @@ metadata:
     {{- include "nginx.labels" . | nindent 4 }}
   namespace: $ARGOCD_APP_NAMESPACE
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.pre-prod.replicaCount }} {{ if eq .Release.Namespace "prod" }} {{ .Values.prod.replicaCount }} {{ end }}
+   {{- if eq $ARGOCD_APP_NAMESPACE "prod" }}
+  replicas: {{ .Values.prod.replicaCount }}
+  {{- else }}
+  replicas: {{ .Values.pre-prod.replicaCount }} 
   {{- end }}
   selector:
     matchLabels:
@@ -32,7 +34,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: image: "{{ .Values.image.repository }}:{{ .Values.pre-prod.image.tag | default .Chart.AppVersion }}{{ if eq .Release.Namespace "prod" }} {{ .Values.prod.image.tag }} {{ end }}"
+         {{- if eq $ARGOCD_APP_NAMESPACE "prod" }} 
+          image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
+          {{- else }}
+          image: "{{ .Values.image.repository }}:{{ .Values.pre-prod.image.tag | default .Chart.AppVersion }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

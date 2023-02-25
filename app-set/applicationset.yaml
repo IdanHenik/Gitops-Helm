@@ -8,11 +8,9 @@ spec:
   - list:
       elements:
       - namespace: pre-prod
-        name: app-1
-        files: values.yaml
+        name: app-3
       - namespace: prod
-        name: app-2
-        files: values.prod.yaml
+        name: app-4
   template:
     metadata:
       name: '{{name}}'
@@ -21,7 +19,7 @@ spec:
       source:
         helm:
           valueFiles:
-          - '{{files}}'
+          - values.poc.yaml
         repoURL: https://github.com/IdanHenik/Gitops-Helm.git
         targetRevision: HEAD
         path: parent

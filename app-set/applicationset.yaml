@@ -21,7 +21,7 @@ spec:
           valueFiles:
           - values.poc.yaml
         repoURL: https://github.com/IdanHenik/Gitops-Helm.git
-        targetRevision: HEAD
+        targetRevision: IdanHenik-patching
         path: parent
       destination:
         server: https://kubernetes.default.svc

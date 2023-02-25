@@ -8,21 +8,23 @@ spec:
   - list:
       elements:
       - namespace: pre-prod
-        url: values.yaml
+        name: app-1
+        values: values.yaml
       - namespace: prod
+        name: app-2
         values: values.prod.yaml
   template:
     metadata:
-      name: '{{cluster}}-guestbook'
+      name: '{{name}}'
     spec:
-      project: "my-project"
+      project: "default"
       source:
         helm:
           valueFiles:
           - {{ values }}
         repoURL: https://github.com/IdanHenik/Gitops-Helm.git
         targetRevision: HEAD
-        path: parent/*
+        path: parent
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - namespace: pre-prod
+        url: values.yaml
+      - namespace: prod
+        values: values.prod.yaml
+  template:
+    metadata:
+      name: '{{cluster}}-guestbook'
+    spec:
+      project: "my-project"
+      source:
+        helm:
+          valueFiles:
+          - {{ values }}
+        repoURL: https://github.com/IdanHenik/Gitops-Helm.git
+        targetRevision: HEAD
+        path: parent/*
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+        

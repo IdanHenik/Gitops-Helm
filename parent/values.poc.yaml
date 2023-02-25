@@ -1,0 +1,28 @@
+apache:
+  prod:
+    enabled: true
+    replicaCount: 2
+    image:
+      repository: httpd
+      tag: 2.4
+  pre-prod:
+    enabled: true
+    replicaCount: 3
+    image:
+      repository: httpd
+      tag: latest
+
+nginx:
+  prod:
+    enabled: true
+    replicaCount: 2
+    image:
+      repository: nginx
+      tag: 2.4
+  
+  pre-prod:
+    enabled: true
+    replicaCount: 3
+    image:
+      repository: nginx
+      tag: latest

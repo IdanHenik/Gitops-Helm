@@ -5,7 +5,7 @@ apache:
     image:
       repository: httpd
       tag: 2.4
-  pre-prod:
+  preprod:
     enabled: true
     replicaCount: 3
     image:
@@ -20,7 +20,7 @@ nginx:
       repository: nginx
       tag: 2.4
   
-  pre-prod:
+  preprod:
     enabled: true
     replicaCount: 3
     image:

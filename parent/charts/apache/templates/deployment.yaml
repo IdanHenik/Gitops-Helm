@@ -8,9 +8,9 @@ metadata:
 spec:
   {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}
- {{- else }}
+  {{- else }}
   replicas: {{ index .Values "pre-prod.replicaCount" }} 
- {{- end }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "apache.selectorLabels" . | nindent 6 }}

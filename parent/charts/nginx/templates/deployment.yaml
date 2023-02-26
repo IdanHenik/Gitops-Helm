@@ -9,7 +9,7 @@ spec:
  {{- if eq .Release.Namespace "prod" }}
   replicas: {{ .Values.prod.replicaCount }}
  {{- else }}
-  replicas: {{ index .Values "pre-prod.replicaCount" }} 
+  replicas: {{ .Values "preprod.replicaCount" }} 
  {{- end }}
   selector:
     matchLabels:
@@ -37,7 +37,7 @@ spec:
           {{- if eq .Release.Namespace "prod" }} 
           image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
           {{- else }}
-          image: "{{ .Values.image.repository }}:{{ index .Values "pre-prod.image.tag" }}"
+          image: "{{ .Values.image.repository }}:{{ .Values preprod.image.tag }}"
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

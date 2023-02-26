@@ -4,7 +4,7 @@ metadata:
   name: {{ include "nginx.fullname" . }}
   labels:
     {{- include "nginx.labels" . | nindent 4 }}
-  namespace: $ARGOCD_APP_NAMESPACE
+  #namespace: $ARGOCD_APP_NAMESPACE
 spec:
   type: {{ .Values.service.type }}
   ports:

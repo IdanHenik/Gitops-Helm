@@ -34,11 +34,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-         {{- if eq .Release.Namespace "prod" }} 
+          {{- if eq .Release.Namespace "prod" }} 
           image: "{{ .Values.image.repository }}:{{ .Values.prod.image.tag }}"
-         {{- else }}
+          {{- else }}
           image: "{{ .Values.image.repository }}:{{ index .Values "pre-prod.image.tag" }}"
-         {{- end }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

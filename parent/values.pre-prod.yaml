@@ -4,10 +4,3 @@ apache:
   image:
     repository: httpd
     tag: latest
-
-nginx:
-  enabled: true
-  replicaCount: 2
-  image:
-    repository: nginx
-    tag: latest

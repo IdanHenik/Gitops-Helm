@@ -26,6 +26,7 @@ spec:
           chart: parent
           valueFiles:
           - '{{files}}'
+          - values.yaml
           releaseName: '{{subchart}}'
           dependencyNames:
           - '{{subchart}}'

@@ -23,7 +23,7 @@ spec:
       project: "default"
       source:
         helm:
-          chart: my-parent-chart
+          chart: parent
           version: "1.0.0"
           valueFiles:
           - '{{files}}'

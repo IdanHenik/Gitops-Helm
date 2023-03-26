@@ -11,7 +11,7 @@ spec:
       - namespace: pre-prod
         name: app-apache-1
         subchart: apache
-        files: values.yaml
+        files: values.pre-prod.yaml
       - namespace: prod
         name: app-nginx-2
         subchart: nginx

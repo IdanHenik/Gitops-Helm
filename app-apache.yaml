@@ -1,0 +1,39 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset
+  namespace: openshift-gitops
+spec:
+  generators:
+  - list:
+      elements:
+      - namespace: pre-prod
+        name: app-apache-1
+        subchart: apache
+        files: values.yaml
+      - namespace: prod
+        name: app-nginx-2
+        subchart: nginx
+        files: values.prod.yaml
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: "default"
+      source:
+        helm:
+          chart: my-parent-chart
+          version: "1.0.0"
+          valueFiles:
+          - '{{files}}'
+          releaseName: '{{subchart}}'
+          dependencyNames:
+          - '{{subchart}}'
+        repoURL: https://github.com/IdanHenik/Gitops-Helm.git
+        targetRevision: HEAD
+        path: parent
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+        

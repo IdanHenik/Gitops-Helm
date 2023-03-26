@@ -31,7 +31,7 @@ spec:
           dependencyNames:
           - '{{subchart}}'
         repoURL: https://github.com/IdanHenik/Gitops-Helm.git
-        targetRevision: HEAD
+        targetRevision: spsific-subchart
         path: parent
       destination:
         server: https://kubernetes.default.svc

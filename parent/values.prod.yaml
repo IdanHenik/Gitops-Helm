@@ -1,9 +1,3 @@
-apache:
-  enabled: true
-  replicaCount: 3
-  image:
-    repository: httpd
-    tag: 2.4
 
 nginx:
   enabled: true

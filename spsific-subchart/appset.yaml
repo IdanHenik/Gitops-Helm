@@ -24,7 +24,6 @@ spec:
       source:
         helm:
           chart: parent
-          version: "1.0.0"
           valueFiles:
           - '{{files}}'
           releaseName: '{{subchart}}'

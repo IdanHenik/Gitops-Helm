@@ -24,7 +24,7 @@ spec:
       source:
         helm:
           chart: my-parent-chart
-          version: "1.0.0"
+          version: "1.16.0"
           valueFiles:
           - '{{files}}'
           releaseName: '{{subchart}}'
